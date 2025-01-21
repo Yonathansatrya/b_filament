@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', \App\Livewire\Pages\Home::class)->name('home');
+Route::get('/Article/{article:slug}', \App\Livewire\Pages\Article::class)->name('article');
 
 Route::middleware([
     'auth:sanctum',
