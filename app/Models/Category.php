@@ -2,37 +2,34 @@
 
 namespace App\Models;
 
-use Awcodes\Curator\Models\Media;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class Article extends Model
+class Category extends Model
 {
     use HasFactory;
-    // use CommandsTable;
 
     protected $fillable = [
         'title',
         'slug',
         'content',
+        'text_color',
+        'background_color',
+        'media_id',
         'user_id',
-        'media_id'
+        'is_tag',
+        'parent_id'
     ];
 
-    public function image(): BelongsTo
-    {
-        return $this->BelongsTo(Media::class, 'media_id');
-    }
 
     public function user(): BelongsTo
     {
         return $this->BelongsTo(User::class, 'user_id');
     }
 
-    public function categories(): BelongsToMany
+    public function perent(): BelongsTo
     {
-        return $this->belongsToMany(Category::class);
+        return $this->BelongsTo(Category::class, 'parent_id');
     }
 }

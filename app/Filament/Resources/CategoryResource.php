@@ -4,22 +4,23 @@ namespace App\Filament\Resources;
 
 use Filament\Forms;
 use Filament\Tables;
-use App\Models\Article;
+use App\Models\Category;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
+use App\Forms\Components\Slug;
 use Filament\Resources\Resource;
+use FilamentTiptapEditor\TiptapEditor;
 use Illuminate\Database\Eloquent\Builder;
-use App\Filament\Resources\ArticleResource\Pages;
+use App\Filament\Resources\CategoryResource\Pages;
 use Awcodes\Curator\Components\Forms\CuratorPicker;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use App\Filament\Resources\ArticleResource\RelationManagers;
-use App\Forms\Components\Slug;
-use Awcodes\Curator\Components\Tables\CuratorColumn;
-use FilamentTiptapEditor\TiptapEditor;
+use App\Filament\Resources\CategoryResource\RelationManagers;
+use Filament\Forms\Components\Select;
+use Filament\Tables\View\TablesRenderHook;
 
-class ArticleResource extends Resource
+class CategoryResource extends Resource
 {
-    protected static ?string $model = Article::class;
+    protected static ?string $model = Category::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
@@ -31,12 +32,13 @@ class ArticleResource extends Resource
                 Slug::make('slug')->required()->minLength(5),
                 TiptapEditor::make('content')->required(),
                 CuratorPicker::make('media_id'),
-                Forms\Components\Select::make('category_id')->relationship('categories', 'title')->searchable(),
-                Forms\Components\Hidden::make('user_id')->dehydrateStateUsing(function($state) {
-                    $user = \Illuminate\Support\Facades\Auth::user();
-                    return $user ? $user->id : null;
-                }),
-                // Forms\Components\Hidden::make('user_id')->dehydrateStateUsing(fn($state) => auth()->id()),
+                Forms\Components\ColorPicker::make('text_color'),
+                Forms\Components\ColorPicker::make('background_color'),
+                Forms\Components\Toggle::make('is_tag'),
+                Forms\Components\Select::make('parent_id')->relationship('parent', 'title'),
+                Forms\Components\Hidden::make('user_id')->dehydrateStateUsing(fn($state) =>
+                ['user_id' => \Illuminate\Support\Facades\Auth::user()->id]),
+                // Forms\Components\Hidden::make('user_id')->dehydrateStateUsing(fn($state) => ['user_id' => auth()->id()]),
             ]);
     }
 
@@ -44,10 +46,7 @@ class ArticleResource extends Resource
     {
         return $table
             ->columns([
-                CuratorColumn::make('media_id')
-                    ->size(40),
-                Tables\Columns\TextColumn::make('title')->searchable(),
-                Tables\Columns\TextColumn::make('slug')->searchable(),
+                Tables\Columns\TextColumn::make('title'),
             ])
             ->filters([
                 //
@@ -68,12 +67,13 @@ class ArticleResource extends Resource
             //
         ];
     }
+
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListArticles::route('/'),
-            'create' => Pages\CreateArticle::route('/create'),
-            'edit' => Pages\EditArticle::route('/{record}/edit'),
+            'index' => Pages\ListCategories::route('/'),
+            'create' => Pages\CreateCategory::route('/create'),
+            'edit' => Pages\EditCategory::route('/{record}/edit'),
         ];
     }
 }
