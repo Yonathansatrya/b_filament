@@ -5,7 +5,6 @@ namespace App\Livewire\Pages;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 use App\Models\Article as ArticleModel;
-use Z3d0X\FilamentFabricator\Models\Page;
 
 class Home extends Component
 {

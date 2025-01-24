@@ -1,7 +1,7 @@
 <div>
     <a class="group max-h-[450px] flex flex-col h-full border border-gray-200 hover:border-transparent hover:shadow-lg transition-all duration-300 rounded-xl p-5 dark:border-neutral-700 dark:hover:border-transparent dark:hover:shadow-black/40"
        wire:navigate
-       href="{{ route('article', $article) }}">
+       href="{{ route('article.show', $article) }}">
         <div class="aspect-w-16 aspect-h-11">
             <img class="w-full object-cover rounded-xl" src="/{{ $article?->image?->path }}"
                  alt="{{  $article?->image?->alt_text }}"/>

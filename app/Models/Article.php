@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use RalphJSmit\Laravel\SEO\Support\HasSEO;
 use RalphJSmit\Laravel\SEO\Support\SEOData;
 use Illuminate\Support\Str;
+use Illuminate\Testing\Fluent\Concerns\Has;
 
 class Article extends Model
 {

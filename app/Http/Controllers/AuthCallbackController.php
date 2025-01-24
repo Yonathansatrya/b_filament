@@ -3,7 +3,6 @@ namespace App\Http\Controllers;
 use App\Factories\Social\CreateUserFactory;
 use Filament\Events\Auth\Registered;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 class AuthCallbackController extends Controller
 {
@@ -13,7 +12,7 @@ class AuthCallbackController extends Controller
     public function __invoke(string $service)
     {
         $user = Socialite::driver($service)->user();
-        Auth::login(
+        auth()->login(
             $user = app(CreateUserFactory::class)
                 ->forService($service)
                 ->create($user)
