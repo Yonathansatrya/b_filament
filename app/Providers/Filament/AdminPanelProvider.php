@@ -37,7 +37,8 @@ class AdminPanelProvider extends PanelProvider
                     ->navigationSort(3)
                     ->navigationCountBadge()
                     ->registerNavigation(true)
-                    ->defaultListView('grid' || 'list')
+                    ->defaultListView('grid' || 'list'),
+                    \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),
             ])
             ->colors([
                 'primary' => Color::Amber,

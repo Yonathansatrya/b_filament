@@ -2,13 +2,22 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Str;
+use PharIo\Manifest\License;
+use App\Livewire\Pages\Article;
+use Awcodes\Curator\Models\Media;
+use PhpParser\Node\Expr\FuncCall;
 use Illuminate\Database\Eloquent\Model;
+use RalphJSmit\Laravel\SEO\Support\HasSEO;
+use RalphJSmit\Laravel\SEO\Support\SEOData;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Category extends Model
 {
     use HasFactory;
+    use HasSEO;
 
     protected $fillable = [
         'title',
@@ -23,13 +32,32 @@ class Category extends Model
     ];
 
 
+    public function image(): BelongsTo
+    {
+        return $this->BelongsTo(Media::class, 'media_id');
+    }
+
     public function user(): BelongsTo
     {
         return $this->BelongsTo(User::class, 'user_id');
     }
 
-    public function perent(): BelongsTo
+    public function articles(): BelongsToMany
     {
-        return $this->BelongsTo(Category::class, 'parent_id');
+        return $this->belongsToMany(Article::class, 'article_category');
+    }
+
+    public function parent(): BelongsTo
+    {
+        return $this->belongsTo(self::class, 'parent_id');
+    }
+
+    public function getDynamicSEOData(): SEOData
+    {
+        return new SEOData(
+            title: $this->title,
+            description: Str::limit(tiptap_converter()->asText($this->content, 100)),
+            image: $this->image?->path,
+        );
     }
 }

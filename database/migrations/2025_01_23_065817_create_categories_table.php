@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('text_color')->nullable();
             $table->string('background_color')->nullable();
             $table->boolean('is_tag')->default(false);
-            $table->foreignId('user_id')->nullable()->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')->nullable()->constrained('users')->onDelete('cascade');
             $table->foreignId('media_id')->nullable()->constrained('media')->nullOnDelete();
             $table->foreignId('parent_id')->nullable()->constrained('categories')->cascadeOnDelete();
             $table->timestamps();

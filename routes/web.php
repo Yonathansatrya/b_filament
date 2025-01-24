@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthRedirectController;
 
 Route::get('/', \App\Livewire\Pages\Home::class)->name('home');
 Route::get('/Article/{article:slug}', \App\Livewire\Pages\Article::class)->name('article');
+Route::get('/categories/{category:slug}', \App\Livewire\Pages\Category::class)->name('category.show');
 
 Route::middleware([
     'auth:sanctum',
