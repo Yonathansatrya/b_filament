@@ -1,13 +1,17 @@
 <?php
+
 namespace App\Filament\Fabricator\PageBlocks;
+
 use App\Models\Article;
 use App\Models\Category;
-use Filament\Forms\Components\Builder\Block;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Components\TextInput;
-use FilamentTiptapEditor\Enums\TiptapOutput;
 use FilamentTiptapEditor\TiptapEditor;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Builder\Block;
+use FilamentTiptapEditor\Enums\TiptapOutput;
 use Z3d0X\FilamentFabricator\PageBlocks\PageBlock;
+
+
 class ArticleBlock extends PageBlock
 {
     public static function getBlockSchema(): Block
@@ -32,10 +36,10 @@ class ArticleBlock extends PageBlock
                     ->searchable(),
                 Select::make('sort_by')->required()
                     ->options([
-                    'created_at' => 'Created At',
-                    'updated_at' => 'Updated At',
-                    'popular' => 'Most Popular'
-                ])->searchable(),
+                        'created_at' => 'Created At',
+                        'updated_at' => 'Updated At',
+                        'popular' => 'Most Popular'
+                    ])->searchable(),
                 Select::make('show_load_more')->label('Show Load More Button')
                     ->options([
                         'true' => 'Yes',

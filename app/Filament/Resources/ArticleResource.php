@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Filament\Resources;
 
 use App\Enums\ArticleStatus;
@@ -16,6 +17,7 @@ use Filament\Tables\Table;
 use FilamentTiptapEditor\Enums\TiptapOutput;
 use FilamentTiptapEditor\TiptapEditor;
 use RalphJSmit\Filament\SEO\SEO;
+
 class ArticleResource extends Resource
 {
     protected static ?string $model = Article::class;
@@ -36,7 +38,7 @@ class ArticleResource extends Resource
                             ->preload()
                             ->relationship('categories', 'title')
                             ->searchable(),
-                        Forms\Components\Hidden::make('user_id')->dehydrateStateUsing(fn($state) => auth()->id()),
+                        Forms\Components\Hidden::make('user_id')->dehydrateStateUsing(fn($state) =>auth()->id),
                         Forms\Components\Select::make('status')
                             ->options(ArticleStatus::options())
                     ]),

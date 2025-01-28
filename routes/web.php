@@ -6,11 +6,12 @@ use App\Http\Controllers\AuthRedirectController;
 
 Route::get('/', \App\Livewire\Pages\Home::class)->name('home');
 Route::get('/Article/{article:slug}', \App\Livewire\Pages\Article::class)->name('article.show');
+Route::get('/{page:slug}', \App\Livewire\Pages\Page::class)->name('page.show');
 Route::get('/categories/{category:slug}', \App\Livewire\Pages\Category::class)->name('category.show');
 
 Route::middleware([
     'auth:sanctum',
-    config('jetstream.auth_session'),
+    config('jetstaream.auth_session'),
     'verified',
 ])->group(function () {
     Route::get('/dashboard', function () {
@@ -19,7 +20,7 @@ Route::middleware([
 });
 
 
-Route::middleware('guest')->group(function() {
+Route::middleware('guest')->group(function () {
     Route::get('/auth/redirect/{service}', AuthRedirectController::class)->name('auth.redirect');
     Route::get('/auth/callback/{service}', [AuthCallbackController::class, 'handle'])->name('auth.callback');
 });

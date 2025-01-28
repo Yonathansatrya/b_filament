@@ -2,7 +2,7 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\CategoryResource\Pages;
+use App\Filament\Resources\CategoryResource\Pages ;
 use App\Filament\Resources\CategoryResource\RelationManagers;
 use App\Forms\Components\Slug;
 use App\Models\Category;
@@ -37,7 +37,7 @@ class CategoryResource extends Resource
                         Forms\Components\ColorPicker::make('background_color'),
                         Forms\Components\Toggle::make('is_tag'),
                         Forms\Components\Hidden::make('user_id')
-                            ->dehydrateStateUsing(fn($state) => auth()->id())
+                            ->dehydrateStateUsing(fn($state) =>auth()->id)
                     ]),
                     Forms\Components\Tabs\Tab::make('SEO')->schema([
                         SEO::make(),

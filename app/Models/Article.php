@@ -2,24 +2,27 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Str;
 use App\Enums\ArticleStatus;
 use Awcodes\Curator\Models\Media;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
+use RalphJSmit\Laravel\SEO\Support\HasSEO;
+use Illuminate\Testing\Fluent\Concerns\Has;
+use RalphJSmit\Laravel\SEO\Support\SEOData;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use CyrildeWit\EloquentViewable\Contracts\Viewable;
+use CyrildeWit\EloquentViewable\InteractsWithViews;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use RalphJSmit\Laravel\SEO\Support\HasSEO;
-use RalphJSmit\Laravel\SEO\Support\SEOData;
-use Illuminate\Support\Str;
-use Illuminate\Testing\Fluent\Concerns\Has;
 
-class Article extends Model
+class Article extends Model implements Viewable
 {
     use HasFactory;
     use SoftDeletes;
     use HasSEO;
+    use InteractsWithViews;
     // use CommandsTable; gak bisa di pakai karena package nya eror dari skeleton
 
     protected $fillable = [
