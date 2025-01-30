@@ -2,15 +2,16 @@
 
 namespace App\Filament\Tiptap;
 
-use Filament\Forms\Components\FileUpload;
 use FilamentTiptapEditor\TiptapBlock;
+
 use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\FileUpload;
 
-class Corousel extends TiptapBlock
+class Carousel extends TiptapBlock
 {
-    public string $preview = 'blocks.previews.stast';
+    public string $preview = 'blocks.previews.carousel';
 
-    public string $rendered = 'blocks.rendered.stast';
+    public string $rendered = 'blocks.rendered.carousel';
 
     public function getFormSchema(): array
     {

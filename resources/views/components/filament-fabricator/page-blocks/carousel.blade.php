@@ -14,8 +14,8 @@
     <div class="max-w-3xl mt-2 mx-auto">
         <x-mary-carousel :slides="array_map(function ($item) {
             return [
-                'image' => '/' . $item['image'],
+                'image' => '/' . $item['image']
             ];
-        }, $images)" />
+        }, $images)"/>
     </div>
 </div>

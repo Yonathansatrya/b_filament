@@ -7,20 +7,28 @@ use Filament\Panel;
 use Filament\Widgets;
 use Filament\PanelProvider;
 use App\Filament\Pages\Dashboard;
+use Awcodes\Curator\CuratorPlugin;
 use Filament\Support\Colors\Color;
 use Hasnayeen\Themes\ThemesPlugin;
+use Mary\View\Components\Dropdown;
 use LivewireUI\Spotlight\Spotlight;
+use Filament\Forms\Components\Toggle;
+use Filament\Forms\Components\TextInput;
 use Filament\Http\Middleware\Authenticate;
 use pxlrbt\FilamentSpotlight\SpotlightPlugin;
+use Hasnayeen\Themes\Http\Middleware\SetTheme;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Filament\Http\Middleware\AuthenticateSession;
+use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Visualbuilder\EmailTemplates\EmailTemplatesPlugin;
 use Z3d0X\FilamentFabricator\FilamentFabricatorPlugin;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
+use Datlechin\FilamentMenuBuilder\FilamentMenuBuilderPlugin;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 
 class AdminPanelProvider extends PanelProvider
@@ -35,7 +43,8 @@ class AdminPanelProvider extends PanelProvider
             ->login()
             ->databaseNotifications()
             ->plugins([
-                \Awcodes\Curator\CuratorPlugin::make()
+                ThemesPlugin::make(),
+                CuratorPlugin::make()
                     ->label('Media')
                     ->pluralLabel('Media')
                     ->navigationIcon('heroicon-o-photo')
@@ -44,10 +53,21 @@ class AdminPanelProvider extends PanelProvider
                     ->navigationCountBadge()
                     ->registerNavigation(true)
                     ->defaultListView('grid' || 'list'),
-                    SpotlightPlugin::make(),
-                    \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),
-                    FilamentFabricatorPlugin::make(),
-                    ThemesPlugin::make()
+                SpotlightPlugin::make(),
+                FilamentShieldPlugin::make(),
+                EmailTemplatesPlugin::make(),
+                FilamentFabricatorPlugin::make(),
+                FilamentMenuBuilderPlugin::make()
+                    ->addLocation('header', 'Header')
+                    ->addLocation('dropdown', 'Dropdown')
+                    ->addMenuFields([
+                        Toggle::make('is_logged_in'),
+                    ])
+                    ->addMenuItemFields([
+                        Toggle::make('is_admin'),
+                        Toggle::make('use_navigate'),
+                        TextInput::make('icon')
+                    ]),
             ])
             ->colors([
                 'primary' => Color::Amber,
@@ -68,7 +88,7 @@ class AdminPanelProvider extends PanelProvider
                 StartSession::class,
                 AuthenticateSession::class,
                 ShareErrorsFromSession::class,
-                \Hasnayeen\Themes\Http\Middleware\SetTheme::class,
+                SetTheme::class,
                 VerifyCsrfToken::class,
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,

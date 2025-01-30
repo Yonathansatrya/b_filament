@@ -13,7 +13,7 @@
     </div>
     <div class="navbar-center hidden lg:flex">
         <ul class="menu menu-horizontal px-1">
-            {{-- @foreach ($menu->menuItems as $item)
+            @foreach ($menu->menuItems as $item)
                 <li>
                     <a href="{{ $item->url }}" wire:navigate>
                         @if ($item->icon)
@@ -22,7 +22,7 @@
                         {{ $item->title }}
                     </a>
                 </li>
-            @endforeach --}}
+            @endforeach
         </ul>
     </div>
     <div class="navbar-end space-x-2">
@@ -43,13 +43,18 @@
                     </div>
                 </div>
                 <ul tabindex="0" class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-                    {{-- @foreach ($dropdown->menuItems as $item)
+                    @foreach ($dropdown->menuItems as $item)
                         <li>
                             <a href="{{ $item->url }}" {{ $item->use_navigate ? 'wire:navigate' : '' }}>
                                 {{ $item->title }}
                             </a>
                         </li>
-                    @endforeach --}}
+                    @endforeach
+                    <li>
+                        <a href="/admin">
+                            Admin Panel
+                        </a>
+                    </li>
                     <li>
                         <form method="POST" action="{{ route('logout') }}" x-data>
                             @csrf
@@ -64,10 +69,10 @@
     </div>
     <x-mary-drawer wire:model="responsiveMenu" class="w-11/12 lg:w-1/3">
         <x-mary-menu class="p-0 m-0">
-            {{-- @foreach ($menu->menuItems as $item)
+            @foreach ($menu->menuItems as $item)
                 <x-mary-menu-item title="{{ $item->title }}" link="{{ $item->url }}"
                     icon="{{ $item->icon }}" />
-            @endforeach --}}
+            @endforeach
         </x-mary-menu>
     </x-mary-drawer>
 </div>

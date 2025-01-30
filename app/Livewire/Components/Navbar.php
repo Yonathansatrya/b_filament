@@ -16,8 +16,8 @@ class Navbar extends Component
     public function render(): View
     {
         return view('livewire.components.navbar', [
-            // 'menu' => Menu::location('header'),
-            // 'dropdown' => Menu::location('dropdown'),
+            'menu' => Menu::location('header'),
+            'dropdown' => Menu::location('dropdown'),
         ]);
     }
 }

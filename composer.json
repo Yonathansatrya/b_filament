@@ -13,10 +13,13 @@
         "awcodes/filament-curator": "^3.6",
         "awcodes/filament-tiptap-editor": "^3.5",
         "bezhansalleh/filament-shield": "^3.3",
+        "binafy/laravel-cart": "^1.1",
         "cyrildewit/eloquent-viewable": "^7.0",
+        "datlechin/filament-menu-builder": "^0.6.3",
         "dotswan/filament-laravel-pulse": "^1.1",
         "filament/filament": "^3.2",
         "hasnayeen/themes": "^3.0",
+        "laravel/cashier": "^15.6",
         "laravel/framework": "^11.31",
         "laravel/jetstream": "^5.3",
         "laravel/pulse": "^1.3",
@@ -29,6 +32,7 @@
         "pxlrbt/filament-spotlight": "^1.3",
         "ralphjsmit/laravel-filament-seo": "^1.4",
         "robsontenorio/mary": "^1.41",
+        "visualbuilder/email-templates": "^3.1",
         "z3d0x/filament-fabricator": "^2.4"
     },
     "require-dev": {

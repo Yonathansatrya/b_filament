@@ -29,11 +29,11 @@ class Dashboard extends \Filament\Pages\Dashboard
         return [
             ActionGroup::make([
                 Action::make('1h')
-                    ->action(fn() => $this->redirect(route('filament.manager.pages.dashboard'))),
+                    ->action(fn() => $this->redirect(route('filament.admin.pages.dashboard'))),
                 Action::make('24h')
-                    ->action(fn() => $this->redirect(route('filament.manager.pages.dashboard', ['period' => '24_hours']))),
+                    ->action(fn() => $this->redirect(route('filament.admin.pages.dashboard', ['period' => '24_hours']))),
                 Action::make('7d')
-                    ->action(fn() => $this->redirect(route('filament.manager.pages.dashboard', ['period' => '7_days']))),
+                    ->action(fn() => $this->redirect(route('filament.admin.pages.dashboard', ['period' => '7_days']))),
             ])
                 ->label(__('Filter'))
                 ->icon('heroicon-m-funnel')
