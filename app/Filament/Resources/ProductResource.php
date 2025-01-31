@@ -1,26 +1,31 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Filament\Resources;
 
-use App\Enums\ProductStatus;
-use App\Filament\Resources\ProductResource\Pages;
-use App\Filament\Resources\ProductResource\RelationManagers;
-use App\Forms\Components\Slug;
-use App\Models\Product;
-use Awcodes\Curator\Components\Forms\CuratorPicker;
 use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
 use Filament\Tables;
+use App\Models\Product;
+use Filament\Forms\Form;
 use Filament\Tables\Table;
-use FilamentTiptapEditor\Enums\TiptapOutput;
-use FilamentTiptapEditor\TiptapEditor;
+use App\Enums\ProductStatus;
+use App\Forms\Components\Slug;
+use Filament\Resources\Resource;
 use RalphJSmit\Filament\SEO\SEO;
+use FilamentTiptapEditor\TiptapEditor;
+use FilamentTiptapEditor\Enums\TiptapOutput;
+use App\Filament\Resources\ProductResource\Pages;
+use Awcodes\Curator\Components\Forms\CuratorPicker;
+use Saade\FilamentAdjacencyList\Forms\Components\AdjacencyList;
+use CodeWithDennis\FilamentPriceFilter\Filament\Tables\Filters\PriceFilter;
 
-class ProductResource extends Resource
+final class ProductResource extends Resource
 {
     protected static ?string $model = Product::class;
+
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+
     public static function form(Form $form): Form
     {
         return $form
@@ -45,22 +50,41 @@ class ProductResource extends Resource
                             ->relationship('images', 'id')
                             ->orderColumn('position')
                             ->required(),
+                        Forms\Components\TextInput::make('stock')->required()->numeric(),
+                        Forms\Components\TextInput::make('price')->required()->numeric(),
                     ]),
                     Forms\Components\Tabs\Tab::make('SEO')->schema([
                         SEO::make(),
                     ]),
-                ])
+                    Forms\Components\Tabs\Tab::make('Variants')->schema([
+                        AdjacencyList::make('variants')
+                            ->form([
+                                Forms\Components\TextInput::make('label')
+                                    ->required(),
+                                Forms\Components\TextInput::make('type')
+                                    ->required(),
+                                Forms\Components\TextInput::make('stock')
+                                    ->numeric()
+                                    ->required(),
+                            ]),
+
+                    ]),
+                ]),
             ])->columns(1);
     }
+
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('title'),
                 Tables\Columns\TextColumn::make('slug'),
+                Tables\Columns\TextColumn::make('price')
+                    ->numeric(),
+                Tables\Columns\TextColumn::make('stock')->numeric(),
             ])
             ->filters([
-                //
+                PriceFilter::make('price'),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
@@ -71,12 +95,14 @@ class ProductResource extends Resource
                 ]),
             ]);
     }
+
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
+
     public static function getPages(): array
     {
         return [

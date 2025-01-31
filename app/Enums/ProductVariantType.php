@@ -4,15 +4,11 @@ namespace App\Enums;
 
 use Illuminate\Support\Str;
 
-enum ProductStatus: string
+enum ProductVariantType: string
 {
-    case DRAFT = 'Draft';
+    case RANGE = 'Range';
 
-    case PUBLISHED = 'Published';
-
-    case ARCHIVED = 'Archived';
-
-    case DISCONTINUED = 'Discontinued';
+    case COLOR = 'Color';
 
     public static function values(): array
     {
@@ -24,5 +20,5 @@ enum ProductStatus: string
         return collect(self::cases())
             ->mapWithKeys(fn($case) => [$case->value => Str::title($case->name)])
             ->all();
-    }
+    } 
 }

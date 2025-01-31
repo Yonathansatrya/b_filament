@@ -1,20 +1,24 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Filament\Resources;
 
-use App\Enums\OrderStatus;
-use App\Filament\Resources\OrderResource\Pages;
-use App\Filament\Resources\OrderResource\RelationManagers;
+use Filament\Tables;
+
 use App\Models\Order;
 use Filament\Forms\Form;
-use Filament\Resources\Resource;
-use Filament\Tables;
+use App\Enums\OrderStatus;
 use Filament\Tables\Table;
+use Filament\Resources\Resource;
+use App\Filament\Resources\OrderResource\Pages;
 
-class OrderResource extends Resource
+final class OrderResource extends Resource
 {
     protected static ?string $model = Order::class;
+
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+
     public static function form(Form $form): Form
     {
         return $form
@@ -22,6 +26,7 @@ class OrderResource extends Resource
                 //
             ]);
     }
+
     public static function table(Table $table): Table
     {
         return $table
@@ -46,12 +51,14 @@ class OrderResource extends Resource
                 ]),
             ]);
     }
+
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
+
     public static function getPages(): array
     {
         return [

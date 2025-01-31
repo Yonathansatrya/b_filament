@@ -2,8 +2,11 @@
 
 namespace App\Models;
 
+
+use App\Models\Category;
 use Illuminate\Support\Str;
 use App\Enums\ProductStatus;
+use Laravel\Scout\Searchable;
 use Awcodes\Curator\Models\Media;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
@@ -16,12 +19,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Testing\Concerns\InteractsWithViews;
 
-class Product extends Model //implements Viewable eror 
+class Product extends Model //implements Viewable eror
 {
     use HasFactory;
     use HasSEO;
-    // use Searchable;
+    use Searchable;
     use InteractsWithViews;
+    
     protected $fillable = [
         'title',
         'slug',
@@ -29,12 +33,14 @@ class Product extends Model //implements Viewable eror
         'content',
         'status',
         'stock',
+        'variants',
         'price'
     ];
 
     protected $casts = [
         'status' => ProductStatus::class,
         'content' => 'array',
+        'variants' => 'arrat',
     ];
 
     public function user(): BelongsTo
@@ -61,7 +67,7 @@ class Product extends Model //implements Viewable eror
     {
         return new SEOData(
             title: $this->title,
-            // description: Str::limit(tiptap_converter()->asText($this->content, 100)),
+            description: Str::limit(tiptap_converter()->asText($this->content, 100)),
         );
     }
 

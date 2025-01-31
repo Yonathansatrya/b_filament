@@ -13,11 +13,13 @@ use RalphJSmit\Laravel\SEO\Support\SEOData;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Laravel\Scout\Searchable;
 
 class Category extends Model
 {
     use HasFactory;
     use HasSEO;
+    use Searchable;
 
     protected $fillable = [
         'title',

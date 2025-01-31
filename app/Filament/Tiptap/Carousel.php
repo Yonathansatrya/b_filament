@@ -3,7 +3,6 @@
 namespace App\Filament\Tiptap;
 
 use FilamentTiptapEditor\TiptapBlock;
-
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\FileUpload;
 

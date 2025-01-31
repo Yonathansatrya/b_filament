@@ -34,6 +34,7 @@
             </main>
         @endif --}}
     </div>
+    <x-mary-spotlight/>
     @stack('modals')
     @livewireScripts
 </body>

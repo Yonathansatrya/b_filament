@@ -2,10 +2,10 @@
 
 namespace App\Providers;
 
-use App\Filament\Tiptap\Corousel;
 use App\Filament\Tiptap\Stats;
-use Illuminate\Support\ServiceProvider;
+use App\Filament\Tiptap\Carousel;
 use FilamentTiptapEditor\TiptapEditor;
+use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -18,7 +18,7 @@ class AppServiceProvider extends ServiceProvider
             $component
                 ->blocks([
                     Stats::class,
-                    Corousel::class,
+                    Carousel::class,
                 ]);
         });
     }
