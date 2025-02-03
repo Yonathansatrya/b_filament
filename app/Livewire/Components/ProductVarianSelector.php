@@ -8,7 +8,6 @@ use App\Models\Product;
 use Illuminate\Support\Collection;
 use Livewire\Component;
 use Illuminate\View\View;
-use PhpParser\Node\Expr\FuncCall;
 
 class ProductVarianSelector extends Component
 {
@@ -18,11 +17,11 @@ class ProductVarianSelector extends Component
 
     public function mount(): void
     {
-        $this->$selectedColor = null;
-        $this->$selectedOptions = [];
+        $this->selectedColor = null;
+        $this->selectedOptions = [];
     }
 
-    public function selectedColor(): void
+    public function selectColor($color): void
     {
         $this->selectedColor = $color;
     }

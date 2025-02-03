@@ -6,7 +6,8 @@
                     {{ $article?->title }}
                 </h1>
 
-                <img class="rounded-sm" src="/{{ $article->image->path }}" alt="{{  $article->image->alt_text }}"/>
+                <img class="rounded-sm" src="{{ asset('storage/' . $article->image->path) }}"
+                alt="{{ $article->image->alt_text }}"/>
 
                 {!! tiptap_converter()->asHTML($article?->content ?? '', toc: true, maxDepth: 4) !!}
 
@@ -17,7 +18,7 @@
         </div>
     </div>
 
-    
+
     {{-- package tidak terdownload --}}
     {{-- <div class="max-w-5xl mx-auto sm:px-6 lg:px-8">
         <div class="p-10 bg-white dark:bg-gray-800 shadow rounded overflow-hidden">
