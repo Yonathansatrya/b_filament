@@ -24,19 +24,15 @@
 </head>
 
 <body class="font-sans antialiased">
+    @livewireStyles
     <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
         <livewire:components.navbar />
-
-        {{-- <!-- Page Heading -->
-        @if (isset($header))
-            @@ -37,9 +44,8 @@
-            {{ $slot }}
-            </main>
-        @endif --}}
+        {{ $slot }}
     </div>
     <x-mary-spotlight/>
     @stack('modals')
     @livewireScripts
+    {{-- @livewireScriptConfig --}}
 </body>
 
 </html>

@@ -1,10 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
-
-use App\Models\Category;
 use Illuminate\Support\Str;
+
 use App\Enums\ProductStatus;
 use Laravel\Scout\Searchable;
 use Awcodes\Curator\Models\Media;
@@ -13,18 +14,17 @@ use Illuminate\Database\Eloquent\Builder;
 use RalphJSmit\Laravel\SEO\Support\HasSEO;
 use RalphJSmit\Laravel\SEO\Support\SEOData;
 use CyrildeWit\EloquentViewable\Contracts\Viewable;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use CyrildeWit\EloquentViewable\InteractsWithViews;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Foundation\Testing\Concerns\InteractsWithViews;
 
-class Product extends Model //implements Viewable eror
+class Product extends Model implements Viewable
 {
     use HasFactory;
     use HasSEO;
-    use Searchable;
     use InteractsWithViews;
+    use Searchable;
 
     protected $fillable = [
         'title',
@@ -34,7 +34,7 @@ class Product extends Model //implements Viewable eror
         'status',
         'stock',
         'variants',
-        'price'
+        'price',
     ];
 
     protected $casts = [

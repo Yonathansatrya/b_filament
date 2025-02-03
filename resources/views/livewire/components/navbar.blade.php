@@ -51,11 +51,6 @@
                         </li>
                     @endforeach
                     <li>
-                        <a href="/admin">
-                            Admin Panel
-                        </a>
-                    </li>
-                    <li>
                         <form method="POST" action="{{ route('logout') }}" x-data>
                             @csrf
                             <a href="{{ route('logout') }}" @click.prevent="$root.submit()">

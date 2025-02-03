@@ -19,3 +19,4 @@
         {{ Number::currency((float) ($product->price / 100)) }}
     </h5>
 </a>
+
