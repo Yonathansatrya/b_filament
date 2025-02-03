@@ -6,7 +6,7 @@ use App\Http\Controllers\AuthRedirectController;
 
 Route::get('/', \App\Livewire\Pages\Home::class)->name('home');
 Route::get('/Article/{article:slug}', \App\Livewire\Pages\Article::class)->name('article.show');
-Route::get('/Product/{product:slug}', \App\Livewire\Pages\Product::class)->name('Product.show');
+Route::get('/Products/{product:slug}', \App\Livewire\Pages\Product::class)->name('product.show');
 Route::get('/{page:slug}', \App\Livewire\Pages\Page::class)->name('page.show');
 Route::get('/categories/{category:slug}', \App\Livewire\Pages\Category::class)->name('category.show');
 

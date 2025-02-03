@@ -16,6 +16,6 @@
         @endif
     </div>
     <h5 class="text-sm font-medium text-gray-900">
-        {{ Number::currency(number_format($product->price / 100, 3)) }}
+        {{ Number::currency((float) ($product->price / 100)) }}
     </h5>
 </a>

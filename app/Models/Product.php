@@ -25,7 +25,7 @@ class Product extends Model //implements Viewable eror
     use HasSEO;
     use Searchable;
     use InteractsWithViews;
-    
+
     protected $fillable = [
         'title',
         'slug',
@@ -40,7 +40,8 @@ class Product extends Model //implements Viewable eror
     protected $casts = [
         'status' => ProductStatus::class,
         'content' => 'array',
-        'variants' => 'arrat',
+        'variants' => 'array',
+        'price' => 'float',
     ];
 
     public function user(): BelongsTo

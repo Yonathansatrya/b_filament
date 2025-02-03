@@ -8,7 +8,7 @@ use App\Models\Product;
 use Illuminate\Support\Collection;
 use Livewire\Component;
 use Illuminate\View\View;
-
+use PhpParser\Node\Expr\FuncCall;
 
 class ProductVarianSelector extends Component
 {
@@ -27,6 +27,12 @@ class ProductVarianSelector extends Component
         $this->selectedColor = $color;
     }
 
+    public function getColorVariants(): Collection
+    {
+        return collect($this->product->variants)
+            ->filter(fn ($variant) => $variant['type'] === 'Color');
+    }
+
     public function getChildrenVariants(): Collection
     {
         if (!$this->selectedColor || !isset($this->product->variants[$this->selectedColor]['children'])) {
@@ -39,7 +45,8 @@ class ProductVarianSelector extends Component
     public function render(): View
     {
         return view('livewire.components.product-varian-selector', [
-            'currentVariants' => $this->getCurrentVariants(),
+            'colorVariants' => $this->getColorVariants(),
+            'childrenVariants' => $this->getChildrenVariants(),
         ]);
     }
 }

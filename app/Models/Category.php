@@ -33,6 +33,9 @@ class Category extends Model
         'parent_id'
     ];
 
+    protected $casts = [
+        'content' => 'array'
+    ];
 
     public function image(): BelongsTo
     {
@@ -53,12 +56,12 @@ class Category extends Model
     {
         return $this->belongsTo(self::class, 'parent_id');
     }
-
+    
     public function getDynamicSEOData(): SEOData
     {
         return new SEOData(
             title: $this->title,
-            description: Str::limit(tiptap_converter()->asText($this->content, 100)),
+            description: tiptap_converter()->asText(Str::limit($this->content, 160)),
             image: $this->image?->path,
         );
     }

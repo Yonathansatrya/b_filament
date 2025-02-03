@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use Illuminate\Support\Str;
@@ -16,6 +18,7 @@ use CyrildeWit\EloquentViewable\InteractsWithViews;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Laravel\Scout\Searchable;
 
 class Article extends Model implements Viewable
 {
@@ -23,6 +26,7 @@ class Article extends Model implements Viewable
     use SoftDeletes;
     use HasSEO;
     use InteractsWithViews;
+    use Searchable;
     // use CommandsTable; gak bisa di pakai karena package nya eror dari skeleton
 
     protected $fillable = [
@@ -38,9 +42,9 @@ class Article extends Model implements Viewable
         'content' => 'array',
     ];
 
-    public function scopeIsPublished(Builder $query): Builder
+    public function scopeIsPublished(Builder $builder): Builder
     {
-        return $query->where('status', ArticleStatus::PUBLISHED);
+        return $builder->where('status', ArticleStatus::PUBLISHED);
     }
 
     public function image(): BelongsTo
