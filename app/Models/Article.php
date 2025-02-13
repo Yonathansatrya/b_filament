@@ -6,6 +6,7 @@ namespace App\Models;
 
 use Illuminate\Support\Str;
 use App\Enums\ArticleStatus;
+use Laravel\Scout\Searchable;
 use Awcodes\Curator\Models\Media;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
@@ -18,7 +19,7 @@ use CyrildeWit\EloquentViewable\InteractsWithViews;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Laravel\Scout\Searchable;
+use Parallax\FilamentComments\Models\Traits\HasFilamentComments;
 
 class Article extends Model implements Viewable
 {
@@ -27,6 +28,7 @@ class Article extends Model implements Viewable
     use HasSEO;
     use InteractsWithViews;
     use Searchable;
+    // use HasFilamentComments; coba comment lain
     // use CommandsTable; gak bisa di pakai karena package nya eror dari skeleton
 
     protected $fillable = [
@@ -34,7 +36,7 @@ class Article extends Model implements Viewable
         'slug',
         'content',
         'user_id',
-        'media_id'
+        'media_id',
     ];
 
     protected $casts = [
@@ -59,7 +61,7 @@ class Article extends Model implements Viewable
 
     public function categories(): BelongsToMany
     {
-        return $this->belongsToMany(Category::class);
+        return $this->belongsToMany(Category::class, 'article_category');
     }
 
     public function getDynamicSEOData(): SEOData

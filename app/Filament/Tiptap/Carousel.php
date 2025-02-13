@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Filament\Tiptap;
 
 use FilamentTiptapEditor\TiptapBlock;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\FileUpload;
 
-class Carousel extends TiptapBlock
+final class Carousel extends TiptapBlock
 {
     public string $preview = 'blocks.previews.carousel';
 
@@ -15,12 +17,12 @@ class Carousel extends TiptapBlock
     public function getFormSchema(): array
     {
         return [
-
-            Repeater::make('members')
+            Repeater::make('images')
                 ->schema([
-                    FileUpload::make('image')->required(),
-                ])
-                ->columns(2),
+                    FileUpload::make('image')
+                    ->directory('carousel')
+                    ->required(),
+                ]),
         ];
     }
 }

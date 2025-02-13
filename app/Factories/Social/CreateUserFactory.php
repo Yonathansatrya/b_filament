@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Factories\Social;
-use App\Actions\Social\CreateGithubUser;
+
 use App\Actions\Social\CreateXUser;
+
 class CreateUserFactory
 {
     /**

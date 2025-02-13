@@ -2,21 +2,22 @@
 
 namespace App\Filament\Resources;
 
-use App\Enums\ArticleStatus;
-use App\Filament\Resources\ArticleResource\Pages;
-use App\Filament\Resources\ArticleResource\RelationManagers;
-use App\Forms\Components\Slug;
+use Filament\Forms;
+use Filament\Tables;
 use App\Models\Article;
+use Filament\Forms\Form;
+use Filament\Tables\Table;
+use App\Enums\ArticleStatus;
+use App\Forms\Components\Slug;
+use Filament\Resources\Resource;
+use RalphJSmit\Filament\SEO\SEO;
+use FilamentTiptapEditor\TiptapEditor;
+use FilamentTiptapEditor\Enums\TiptapOutput;
+use App\Filament\Resources\ArticleResource\Pages;
 use Awcodes\Curator\Components\Forms\CuratorPicker;
 use Awcodes\Curator\Components\Tables\CuratorColumn;
-use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
-use Filament\Tables;
-use Filament\Tables\Table;
-use FilamentTiptapEditor\Enums\TiptapOutput;
-use FilamentTiptapEditor\TiptapEditor;
-use RalphJSmit\Filament\SEO\SEO;
+use App\Filament\Resources\ArticleResource\RelationManagers;
+use Parallax\FilamentComments\Tables\Actions\CommentsAction;
 
 class ArticleResource extends Resource
 {
@@ -79,6 +80,8 @@ class ArticleResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
+                // CommentsAction::make(), comment tapi belum coba
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

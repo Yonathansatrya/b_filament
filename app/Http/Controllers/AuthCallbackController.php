@@ -1,9 +1,12 @@
 <?php
+
 namespace App\Http\Controllers;
+
 use App\Factories\Social\CreateUserFactory;
 use Filament\Events\Auth\Registered;
 use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
+
 class AuthCallbackController extends Controller
 {
     /**
@@ -20,6 +23,6 @@ class AuthCallbackController extends Controller
         if ($user->wasRecentlyCreated) {
             event(new Registered($user));
         }
-        return redirect()->route('home');
+        return redirect()->back();
     }
 }

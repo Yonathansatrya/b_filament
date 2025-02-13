@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
+use App\Models\Article;
 use Illuminate\Support\Str;
 use PharIo\Manifest\License;
-use App\Livewire\Pages\Article;
+use Laravel\Scout\Searchable;
 use Awcodes\Curator\Models\Media;
 use PhpParser\Node\Expr\FuncCall;
 use Illuminate\Database\Eloquent\Model;
@@ -13,7 +14,6 @@ use RalphJSmit\Laravel\SEO\Support\SEOData;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Laravel\Scout\Searchable;
 
 class Category extends Model
 {
@@ -56,7 +56,7 @@ class Category extends Model
     {
         return $this->belongsTo(self::class, 'parent_id');
     }
-    
+
     public function getDynamicSEOData(): SEOData
     {
         return new SEOData(

@@ -19,6 +19,8 @@ use App\Filament\Resources\ProductResource\Pages;
 use Awcodes\Curator\Components\Forms\CuratorPicker;
 use Saade\FilamentAdjacencyList\Forms\Components\AdjacencyList;
 use CodeWithDennis\FilamentPriceFilter\Filament\Tables\Filters\PriceFilter;
+use Filament\Tables\View\TablesRenderHook;
+use PhpParser\Node\Stmt\Label;
 
 final class ProductResource extends Resource
 {
@@ -51,7 +53,17 @@ final class ProductResource extends Resource
                             ->orderColumn('position')
                             ->required(),
                         Forms\Components\TextInput::make('stock')->required()->numeric(),
-                        Forms\Components\TextInput::make('price')->required()->numeric(),
+                        Forms\Components\TextInput::make('price')
+                            ->label('Harga')
+                            ->required()
+                            ->prefix('Rp')
+                            ->live(debounce: 500)
+                            ->dehydrateStateUsing(fn($state) => $state !== null
+                                ? (float) str_replace(['.', ','], ['', '.'], $state) * 100
+                                : null)
+                            ->formatStateUsing(fn($state) => $state !== null
+                                ? number_format($state / 100, 2, ',', '.')
+                                : null)
                     ]),
                     Forms\Components\Tabs\Tab::make('SEO')->schema([
                         SEO::make(),
@@ -77,10 +89,14 @@ final class ProductResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('title'),
-                Tables\Columns\TextColumn::make('slug'),
+                Tables\Columns\TextColumn::make('title')
+                    ->label('Nama Product'),
+                Tables\Columns\TextColumn::make('slug')
+                    ->label('Url'),
                 Tables\Columns\TextColumn::make('price')
-                    ->numeric(),
+                    ->label('Harga')
+                    ->numeric(decimalPlaces: 2)
+                    ->formatStateUsing(fn($state) => 'Rp ' . number_format($state / 100, 2, ',', '.')),
                 Tables\Columns\TextColumn::make('stock')->numeric(),
             ])
             ->filters([
@@ -88,6 +104,7 @@ final class ProductResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

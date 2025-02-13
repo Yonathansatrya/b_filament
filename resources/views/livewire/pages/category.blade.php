@@ -5,7 +5,8 @@
                 <h1>
                     {{ $category?->title }}
                 </h1>
-                <img class="rounded-sm" src="/{{ $category->image->path }}" alt="{{  $category->image->alt_text }}"/>
+                <img class="rounded-sm" src="{{ asset('storage/' . $article->image->path) }}"
+                    alt="{{ $article->image->alt_text }}"/>
                 {!! tiptap_converter()->asHTML($category?->content ?? '', toc: true, maxDepth: 4) !!}
             </article>
         </div>

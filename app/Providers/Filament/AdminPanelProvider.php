@@ -37,6 +37,7 @@ class AdminPanelProvider extends PanelProvider
     {
         return $panel
             ->default()
+            ->favicon(asset('logo-obji-removebg-preview.png'))
             ->id('admin')
             ->viteTheme('resources/css/filament/admin/theme.css')
             ->path('admin')

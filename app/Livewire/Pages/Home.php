@@ -20,18 +20,14 @@ final class Home extends Component
 
     public function mount(): void
     {
-        $this->articles = ArticleModel::isPublished()->limit(8)->get();
-        $this->products = ProductModel::isPublished()->limit(8)->get();
-
-        // dd($this->articles, $this->products);
+        $this->articles = ArticleModel::isPublished()->limit(3)->get();
+        $this->products = ProductModel::isPublished()->limit(4)->get();
     }
 
     #[Layout('layouts.app')]
 
     public function render(): Factory|Application|View|\Illuminate\Contracts\Foundation\Application
     {
-        // dd($this->articles, $this->products);
-
         return view('livewire.pages.home');
     }
 }

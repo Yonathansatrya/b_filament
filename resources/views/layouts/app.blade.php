@@ -5,13 +5,15 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    @if (Route::currentRouteName() === 'article')
+
+    @if (Route::currentRouteName() === 'article.show')
         {!! seo()->for(Route::current()->parameter('article')) !!}
     @elseif(Route::currentRouteName() === 'category.show')
         {!! seo()->for(Route::current()->parameter('category')) !!}
     @else
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>{{ config('app.name', 'OBJI') }}</title>
     @endif
+    <link rel="icon" href="{{ asset('logo-obji-removebg-preview.png') }}">
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
@@ -24,15 +26,26 @@
 </head>
 
 <body class="font-sans antialiased">
-    @livewireStyles
-    <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
+
+    <x-banner />
+
+    <div class="min-h-screen bg-blue-400 dark:bg-gray-900">
         <livewire:components.navbar />
-        {{ $slot }}
+
+        @if (isset($header))
+            <header class="bg-white dark:bg-gray-800 shadow">
+                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                    {{ $header }}
+                </div>
+            </header>
+        @endif
+
+        <main class="bg-white">
+            {{ $slot }}
+        </main>
     </div>
-    <x-mary-spotlight/>
+    <x-mary-spotlight />
     @stack('modals')
-    @livewireScripts
-    {{-- @livewireScriptConfig --}}
 </body>
 
 </html>

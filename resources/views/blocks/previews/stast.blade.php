@@ -1,6 +1,6 @@
 <div>
     <x-mary-stat
-        title="{{ $title }}"
+        name="{{ $name }}"
         description="{{ $description }}"
         value="{{ $value }}"
         icon="o-arrow-trending-up"/>

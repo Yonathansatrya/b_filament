@@ -10,7 +10,7 @@ use Livewire\Attributes\Layout;
 use App\Models\Product as ProductModel;
 use Illuminate\Support\Facades\Storage;
 
-final class Product extends Component
+class Product extends Component
 {
     public ProductModel $product;
 
@@ -37,6 +37,7 @@ final class Product extends Component
     }
 
     #[Layout('layouts.app')]
+
     public function render(): View
     {
         return view('livewire.pages.product');

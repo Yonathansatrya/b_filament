@@ -1,7 +1,7 @@
 <div>
     <x-mary-carousel :slides="array_map(function ($item) {
             return [
-                'image' => '/' . $item['image']
+                'image' => Storage::url($item['image'])
             ];
-        }, $images)"/>
+        }, $images)" />
 </div>

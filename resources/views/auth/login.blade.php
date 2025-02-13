@@ -1,9 +1,5 @@
 <x-guest-layout>
     <x-authentication-card>
-        <x-slot name="logo">
-            <x-authentication-card-logo />
-        </x-slot>
-
         <x-validation-errors class="mb-4" />
 
         @session('status')
@@ -12,9 +8,13 @@
             </div>
         @endsession
 
+        <x-slot name="logo">
+            <img src="{{ asset('logo-obji-removebg-preview.png') }}" alt="Logo" class="w-20 h-20">
+        </x-slot>
+
+
         <x-mary-form method="POST" action="{{ route('login') }}" class="login-form">
             @csrf
-
             <div>
                 <x-label for="email" value="{{ __('Email') }}" />
                 <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required
@@ -27,7 +27,7 @@
                     autocomplete="current-password" />
             </div>
 
-            <div class="flex items-center justify-between mt-4">
+            <div class="flex items-center justify-between mt-2">
                 <label class="flex items-center" for="remember_me">
                     <x-checkbox id="remember_me" name="remember" />
                     <span class="ms-2 text-sm text-gray-600 dark:text-gray-400">{{ __('Remember Me') }}</span>
@@ -39,7 +39,7 @@
                     </a>
                 @endif
             </div>
-            <div class="flex mt-4">
+            <div class="flex mt-1">
                 <x-slot:actions>
                     <x-mary-button type="submit" class="w-full btn-primary">
                         {{ __('Log in') }}
@@ -56,7 +56,7 @@
             </div>
         </div>
         <div class="flex">
-            <a class="w-1/2" href="{{ route('auth.redirect', 'twitter') }}">
+            <a class="w-1/2">
                 <x-mary-button label="Twitter" icon="fab.twitter" class="btn-ghost w-full" />
             </a>
             <a class="w-1/2">

@@ -10,6 +10,7 @@ use App\Models\Category as CategoryModel;
 class Category extends Component
 {
     public CategoryModel $category;
+
     #[Layout('layouts.app')]
     public function render(): View
     {

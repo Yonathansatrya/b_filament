@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Filament\Fabricator\PageBlocks;
 
 use FilamentTiptapEditor\TiptapEditor;
@@ -10,7 +12,7 @@ use Filament\Forms\Components\Builder\Block;
 use FilamentTiptapEditor\Enums\TiptapOutput;
 use Z3d0X\FilamentFabricator\PageBlocks\PageBlock;
 
-class CarouselBlock extends PageBlock
+final class CarouselBlock extends PageBlock
 {
     public static function getBlockSchema(): Block
     {
@@ -23,11 +25,15 @@ class CarouselBlock extends PageBlock
                 Repeater::make('images')
                     ->schema([
                         FileUpload::make('image')->required()
+                            ->directory('Pages')
+                            ->required()
                             ->image()
-                            ->imageEditor()
+                            ->imageEditor(),
                     ])
+                    ->columnSpanFull(),
             ]);
     }
+
     public static function mutateData(array $data): array
     {
         return $data;

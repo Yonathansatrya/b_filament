@@ -2,7 +2,6 @@
 
 namespace App\Filament\Fabricator\PageBlocks;
 
-use App\Models\Article;
 use App\Models\Category;
 use Filament\Forms\Components\Select;
 use FilamentTiptapEditor\TiptapEditor;
@@ -12,7 +11,7 @@ use FilamentTiptapEditor\Enums\TiptapOutput;
 use Z3d0X\FilamentFabricator\PageBlocks\PageBlock;
 
 
-class ArticleBlock extends PageBlock
+final class ArticleBlock extends PageBlock
 {
     public static function getBlockSchema(): Block
     {
@@ -38,19 +37,20 @@ class ArticleBlock extends PageBlock
                     ->options([
                         'created_at' => 'Created At',
                         'updated_at' => 'Updated At',
-                        'popular' => 'Most Popular'
+                        'popular' => 'Most Popular',
                     ])->searchable(),
                 Select::make('show_load_more')->label('Show Load More Button')
                     ->options([
                         'true' => 'Yes',
-                        'false' => 'No'
+                        'false' => 'No',
                     ]),
                 TextInput::make('heading')->required()->label('Heading'),
                 TiptapEditor::make('description')
                     ->label('Short Description')
-                    ->output(TiptapOutput::Json)
+                    ->output(TiptapOutput::Json),
             ]);
     }
+
     public static function mutateData(array $data): array
     {
         return [
